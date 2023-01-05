@@ -16,8 +16,16 @@ public class UrlServiceImpl implements UrlService{
 
     @Override
     public CreateUrlResponse createUrl(CreateUrlRequest createUrlRequest){
+        Url newUrl = buildUrl(createUrlRequest);
+        Url savedUrl = UrlRepository.save(newUrl);
+        CreateUrlResponse createUrlResponse = buildResponse(savedUrl);
+        return new CreateUrlResponse(201, newUrl.getShortenedUrl(), "Hello world");
+
 
         return null;
+    }
+
+    private Url buildUrl(CreateUrlRequest createUrlRequest){
     }
 
     @Override
