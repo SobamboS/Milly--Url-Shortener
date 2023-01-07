@@ -3,7 +3,6 @@ package com.urlshortener.urlshortener.controller;
 import com.urlshortener.urlshortener.dto.request.CreateUrlRequest;
 import com.urlshortener.urlshortener.dto.response.CreateUrlResponse;
 import com.urlshortener.urlshortener.services.UrlService;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -28,9 +28,10 @@ public class UrlServiceImpl implements UrlService{
 
     private Url buildUrl(CreateUrlRequest createUrlRequest){
         Url url = new Url();
-        if(!createUrlRequest.getOriginalUrl().startsWith("https") || !createUrlRequest.getOriginalUrl().startsWith("http") ||
-                createUrlRequest.getOriginalUrl().contains("") || createUrlRequest.getOriginalUrl().length()== 0) {
-            throw new InvalidUrlException("Invalid Url");
+      //  if(!createUrlRequest.getOriginalUrl().startsWith("https") || !createUrlRequest.getOriginalUrl().startsWith("http") ||
+       //         createUrlRequest.getOriginalUrl().contains("") || createUrlRequest.getOriginalUrl().length()== 0)
+                {
+           throw new InvalidUrlException("Invalid Url");
         }
     String hashedUrl =getShortenedUrl(createUrlRequest);
         url.setOriginalUrl(createUrlRequest.getOriginalUrl());
