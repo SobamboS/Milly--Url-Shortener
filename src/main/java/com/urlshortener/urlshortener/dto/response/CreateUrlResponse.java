@@ -7,6 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class CreateUrlResponse{
     private int statusCode;
-    private String shortenedUrl;
+    private String originalUrl;
     private String message;
+    private String shortenedUrl;
 }

@@ -6,6 +6,7 @@ import com.urlshortener.urlshortener.data.UrlRepository;
 import com.urlshortener.urlshortener.dto.request.CreateUrlRequest;
 import com.urlshortener.urlshortener.dto.response.CreateUrlResponse;
 import com.urlshortener.urlshortener.exception.InvalidUrlException;
+import com.urlshortener.urlshortener.validator.UrlValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,18 +23,16 @@ public class UrlServiceImpl implements UrlService{
     public CreateUrlResponse createUrl(CreateUrlRequest createUrlRequest){
         Url newUrl = buildUrl(createUrlRequest);
         Url savedUrl = urlRepository.save(newUrl);
-        return new CreateUrlResponse(201, newUrl.getShortenedUrl(), "Hello world");
+        return new CreateUrlResponse(201, newUrl.getShortenedUrl(), "Created", newUrl.getOriginalUrl());
 
     }
 
     private Url buildUrl(CreateUrlRequest createUrlRequest){
         Url url = new Url();
-      //  if(!createUrlRequest.getOriginalUrl().startsWith("https") || !createUrlRequest.getOriginalUrl().startsWith("http") ||
-       //         createUrlRequest.getOriginalUrl().contains("") || createUrlRequest.getOriginalUrl().length()== 0)
-                {
-           throw new InvalidUrlException("Invalid Url");
+        if(UrlValidator.urlIsValid(createUrlRequest.getOriginalUrl())){
+        throw new InvalidUrlException(String.format("Url %s is invalid", createUrlRequest.getOriginalUrl()));
         }
-    String hashedUrl =getShortenedUrl(createUrlRequest);
+        String hashedUrl =getShortenedUrl(createUrlRequest);
         url.setOriginalUrl(createUrlRequest.getOriginalUrl());
         url.setShortenedUrl(hashedUrl);
             return url;
